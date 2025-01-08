@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:nexamart_user/common/widgets/custom_textfield.dart';
+import 'package:nexamart_user/common/widgets/custon_button.dart';
 import 'package:nexamart_user/constants/utils.dart';
 import 'package:nexamart_user/features/address/services/address_services.dart';
 import 'package:nexamart_user/provider/user_provider.dart';
@@ -219,41 +220,45 @@ class _AddressScreenState extends State<AddressScreen> {
                     const SizedBox(
                       height: 10,
                     ),
+                    
+                    CustomButton(text: 'Buy', onTap: ()=> payPressed(address) )
+                    
                   ],
                 ),
               ),
-              ApplePayButton(
-                onPressed: () {
-                  payPressed(address);
-                },
-                width: double.infinity,
-                height: 50,
-                style: ApplePayButtonStyle.whiteOutline,
-                type: ApplePayButtonType.buy,
-                paymentConfiguration:
-                    PaymentConfiguration.fromJsonString(applePayConfig),
-                paymentItems: paymentItem,
-                onPaymentResult: onApplePayResult,
-                margin: const EdgeInsets.only(top: 15),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              GooglePayButton(
-                onPressed: () => payPressed(address),
-                paymentConfiguration:
-                    PaymentConfiguration.fromJsonString(googlePayConfig),
-                paymentItems: paymentItem,
-                onPaymentResult: onGooglePayResult,
-                width: double.infinity,
-                height: 50,
-                theme: GooglePayButtonTheme.light,
-                type: GooglePayButtonType.buy,
-                margin: const EdgeInsets.only(top: 5),
-                loadingIndicator: const Center(
-                  child: CircularProgressIndicator(),
-                ),
-              ),
+              
+              // ApplePayButton(
+              //   onPressed: () {
+              //     payPressed(address);
+              //   },
+              //   width: double.infinity,
+              //   height: 50,
+              //   style: ApplePayButtonStyle.whiteOutline,
+              //   type: ApplePayButtonType.buy,
+              //   paymentConfiguration:
+              //       PaymentConfiguration.fromJsonString(applePayConfig),
+              //   paymentItems: paymentItem,
+              //   onPaymentResult: onApplePayResult,
+              //   margin: const EdgeInsets.only(top: 15),
+              // ),
+              // const SizedBox(
+              //   height: 10,
+              // ),
+              // GooglePayButton(
+              //   onPressed: () => payPressed(address),
+              //   paymentConfiguration:
+              //       PaymentConfiguration.fromJsonString(googlePayConfig),
+              //   paymentItems: paymentItem,
+              //   onPaymentResult: onGooglePayResult,
+              //   width: double.infinity,
+              //   height: 50,
+              //   theme: GooglePayButtonTheme.light,
+              //   type: GooglePayButtonType.buy,
+              //   margin: const EdgeInsets.only(top: 5),
+              //   loadingIndicator: const Center(
+              //     child: CircularProgressIndicator(),
+              //   ),
+              // ),
             ],
           ),
         ),

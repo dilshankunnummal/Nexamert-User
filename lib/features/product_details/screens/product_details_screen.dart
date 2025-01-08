@@ -39,6 +39,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       context: context,
       product: widget.product,
     );
+    Navigator.pop(context);
   }
 
   void navigateToAddressScreen(int sum) {
@@ -150,11 +151,11 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
-                mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                mainAxisAlignment: MainAxisAlignment.end,
                 children: [
-                  Text(
-                    widget.product.id!,
-                  ),
+                  // Text(
+                  //   widget.product.id!,
+                  // ),
                   Stars(rating: avgRating),
                 ],
               ),
@@ -214,15 +215,15 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               color: Colors.black12,
               height: 5,
             ),
-            Padding(
-              padding: const EdgeInsets.all(10.0),
-              child: CustomButton(
-                text: 'Buy Now',
-                onTap: () => userProvider.token.isNotEmpty
-                    ? navigateToAddressScreen(sum.toInt())
-                    : showSnackbar(context, 'Please Login'),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.all(10.0),
+            //   child: CustomButton(
+            //     text: 'Buy Now',
+            //     onTap: () => userProvider.token.isNotEmpty
+            //         ? navigateToAddressScreen(sum.toInt())
+            //         : showSnackbar(context, 'Please Login'),
+            //   ),
+            // ),
             const SizedBox(
               height: 10,
             ),

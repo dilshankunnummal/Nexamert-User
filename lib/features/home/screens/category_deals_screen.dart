@@ -67,9 +67,9 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
 
   @override
   Widget build(BuildContext context) {
-    final productCart = context.watch<UserProvider>().user.cart[widget.index];
-    final product = Product.fromMap(productCart['product']);
-    final quantity = productCart['quantity'];
+    // final productCart = context.watch<UserProvider>().user.cart[widget.index];
+    // final product = Product.fromMap(productCart['product']);
+    // final quantity = productCart['quantity'];
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -209,7 +209,8 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                                             height: 25,
                                             alignment: Alignment.center,
                                             child: Text(
-                                              quantity.toString(),
+                                              // quantity.toString(),
+                                              '1'
                                             ),
                                           ),
                                         ),
