@@ -1,7 +1,7 @@
-
-
+import 'dart:convert';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'dart:typed_data';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nexamart_user/common/widgets/custon_button.dart';
 import 'package:nexamart_user/common/widgets/stars.dart';
@@ -66,11 +66,23 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
     }
   }
 
+
+  //Base64Image Convertion
+  // Uint8List convertedImage(String img){
+  //   String decodedImage = img.split(',').last;
+  //   return base64Decode(decodedImage) as Uint8List;
+  // }
+
   @override
   Widget build(BuildContext context) {
     final userProvider = Provider.of<UserProvider>(context).user;
     double sum = 0;
     sum = widget.product.price;
+
+    // Decode the base64 image string
+    // String decodedImage = widget.product.images.first.split(',').last;
+    // Uint8List imageBytes = base64Decode(decodedImage) as Uint8List;
+
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),

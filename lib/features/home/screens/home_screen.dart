@@ -3,6 +3,7 @@ import 'package:nexamart_user/constants/global_variables.dart';
 import 'package:nexamart_user/features/home/widgets/carousel_image.dart';
 import 'package:nexamart_user/features/home/widgets/deal_of_day.dart';
 import 'package:nexamart_user/features/home/widgets/price_drop.dart';
+import 'package:nexamart_user/features/home/widgets/products_grid.dart';
 import 'package:nexamart_user/features/home/widgets/top_catagories.dart';
 import 'package:nexamart_user/features/search/screens/search_screen.dart';
 // import 'package:nexamart/constants/global_variables.dart';
@@ -42,9 +43,8 @@ class _HomeScreenState extends State<HomeScreen> {
               Container(
                 alignment: Alignment.topLeft,
                 child: Image.asset(
-                  'assets/images/Logo.png',
-                  width: 120,
-                  height: 100,
+                  'assets/images/logoNew.png',
+                  height: 50,
                 ),
               ),
               Expanded(
@@ -128,8 +128,9 @@ class _HomeScreenState extends State<HomeScreen> {
             //   height: 10,
             // ),
             PageViewImage(),
-            DealOfDay(),
-            PriceDrop()
+            ProductsGrid()
+            //DealOfDay(),
+            //PriceDrop()
           ],
         ),
       ),

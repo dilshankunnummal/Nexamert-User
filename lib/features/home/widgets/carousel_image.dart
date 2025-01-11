@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:nexamart_user/constants/global_variables.dart';
-// import 'package:nexamart/constants/global_variables.dart';
 
 class PageViewImage extends StatefulWidget {
   const PageViewImage({super.key});
@@ -13,20 +11,34 @@ class _PageViewImageState extends State<PageViewImage> {
   final PageController _controller = PageController();
   int _currentIndex = 0;
 
+  List<String> carouselImages = [
+    'assets/carousel/carousel1.jpg',
+    'assets/carousel/carousel2.jpg',
+    'assets/carousel/carousel3.jpg',
+  ];
+
   @override
   void initState() {
     super.initState();
-    // Auto-scrolling (optional, change duration as needed)
     Future.delayed(const Duration(seconds: 3), _autoScroll);
   }
 
-  // Auto-scrolling function
   void _autoScroll() {
     if (_controller.hasClients) {
-      _controller.nextPage(
-        duration: const Duration(seconds: 1),
-        curve: Curves.easeInOut,
-      );
+      if (_currentIndex == carouselImages.length - 1) {
+        _controller.animateToPage(
+          0,
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOut,
+        );
+      } else {
+        _controller.nextPage(
+          duration: const Duration(seconds: 1),
+          curve: Curves.easeInOut,
+        );
+      }
+
+      // Delay the next scroll
       Future.delayed(const Duration(seconds: 3), _autoScroll);
     }
   }
@@ -36,18 +48,18 @@ class _PageViewImageState extends State<PageViewImage> {
     return Column(
       children: [
         SizedBox(
-          height: 200, // Height of the carousel
+          height: MediaQuery.of(context).size.width, // Height of the carousel
           child: PageView.builder(
             controller: _controller,
-            itemCount: GlobalVariables.carouselImages.length,
+            itemCount: carouselImages.length,
             onPageChanged: (index) {
               setState(() {
                 _currentIndex = index;
               });
             },
             itemBuilder: (context, index) {
-              return Image.network(
-                GlobalVariables.carouselImages[index],
+              return Image.asset(
+                carouselImages[index],
                 fit: BoxFit.cover,
               );
             },
@@ -56,7 +68,7 @@ class _PageViewImageState extends State<PageViewImage> {
         const SizedBox(height: 8),
         Row(
           mainAxisAlignment: MainAxisAlignment.center,
-          children: GlobalVariables.carouselImages.asMap().entries.map((entry) {
+          children: carouselImages.asMap().entries.map((entry) {
             return GestureDetector(
               onTap: () => _controller.jumpToPage(entry.key),
               child: Container(

@@ -117,6 +117,11 @@ class _AddressScreenState extends State<AddressScreen> {
     }
   }
 
+  void placeOrder(String address){
+    payPressed(address);
+    onApplePayResult(null);
+  }
+
   @override
   void dispose() {
     flatBuildingController.dispose();
@@ -221,7 +226,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       height: 10,
                     ),
                     
-                    CustomButton(text: 'Buy', onTap: ()=> payPressed(address) )
+                    CustomButton(text: 'Buy', onTap: ()=> placeOrder(address) )
                     
                   ],
                 ),

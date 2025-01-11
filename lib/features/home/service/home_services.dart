@@ -91,6 +91,44 @@ class HomeServices {
     return product;
   }
 
+  //Get All Products
+  Future<List<Product>> fetchAllProducts({
+    required BuildContext context,
+  }) async {
+    List<Product> products = [];
+
+    try {
+      http.Response res = await http.get(
+        Uri.parse('http://34.207.150.19:5000/api/get-products'),
+        headers: {
+          'Content-Type': 'application/json; charset=UTF-8',
+        },
+      );
+
+      httpErrorHandle(
+        response: res,
+        context: context,
+        onSuccess: () {
+          for (int i = 0; i < jsonDecode(res.body).length; i++) {
+            products.add(
+              Product.fromJson(
+                jsonEncode(
+                  jsonDecode(
+                    res.body,
+                  )[i],
+                ),
+              ),
+            );
+          }
+        });
+      print(products[0].images.first.length);
+    } catch (e) {
+      print('Error: $e');
+      showSnackbar(context, e.toString());
+    }
+    return products;
+  }
+
   Future<Product> fetchPriceDrop({
     required BuildContext context,
   }) async {
