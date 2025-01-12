@@ -46,6 +46,20 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
     setState(() {});
   }
 
+  // void findInCart(Product product) async{
+  //   final productInCart = context.watch<UserProvider>()
+  //       .user.cart.length;
+  //   for(var item in context.watch<UserProvider>().user.cart){
+  //     // if(item['product.id'])
+  //     print(product.id);
+  //     print(item['product']['_id']);
+  //   }
+  //   print(productInCart.toString());
+  //   // setState(() {
+  //   //   var quantity1 = (productInCart != null) ? productInCart['quantity'] : 0;
+  //   // });
+  // }
+
   // void addToCart() async {
   //   productDetailsServices.addToCart(
   //     context: context,
@@ -70,7 +84,6 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
     // final productCart = context.watch<UserProvider>().user.cart[widget.index];
     // final product = Product.fromMap(productCart['product']);
     // final quantity = productCart['quantity'];
-    var quantity1 = 0;
     return Scaffold(
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(50),
@@ -105,16 +118,17 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                     itemCount: productList!.length,
                     itemBuilder: (context, index){
                       final product = productList![index];
-                      // final productInCart = context.watch<UserProvider>()
-                      //     .user.cart.firstWhere(
-                      //       (cartItem) =>
-                      //   cartItem['product'] != null &&
-                      //       cartItem['product']['id'] == product.id,
-                      //   orElse: () => <String, dynamic>{}, // Return an empty map instead of null
-                      // );
+                      final productInCart = context.watch<UserProvider>()
+                          .user.cart.firstWhere(
+                            (cartItem) =>
+                        cartItem['product'] != null &&
+                            cartItem['product']['_id'] == product.id,
+                        orElse: () => <String, dynamic>{}, // Return an empty map instead of null
+                      );
                       // setState(() {
-                      //   quantity1 = (productInCart != null) ? productInCart['quantity'] : 0;
+                        final quantity = (productInCart != null) ? productInCart['quantity'] : 0;
                       // });
+                      // findInCart(product);
                       return Column(
                         children: [
                           Row(
@@ -220,8 +234,8 @@ class _CategoryDealsScreenState extends State<CategoryDealsScreen> {
                                           height: 25,
                                           alignment: Alignment.center,
                                           child: Text(
-                                            // quantity1.toString(),
-                                            "1"
+                                            quantity.toString()
+                                            // "1"
                                           ),
                                         ),
                                       ),
