@@ -57,211 +57,237 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
       appBar: PreferredSize(
         preferredSize: const Size.fromHeight(60),
         child: AppBar(
-          flexibleSpace: Container(
+          automaticallyImplyLeading: false,
+                    flexibleSpace: Container(
             decoration: const BoxDecoration(
               gradient: GlobalVariables.appBarGradient,
             ),
           ),
-          title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
-            children: [
-              Expanded(
-                child: Container(
-                  height: 42,
-                  margin: const EdgeInsets.only(left: 15),
-                  child: Material(
-                    borderRadius: BorderRadius.circular(7),
-                    elevation: 1,
-                    child: TextFormField(
-                      onFieldSubmitted: navigateToSearchScreen,
-                      decoration: InputDecoration(
-                        prefixIcon: InkWell(
-                          onTap: () {},
-                          child: const Padding(
-                            padding: EdgeInsets.only(left: 6),
-                            child: Icon(
-                              Icons.search,
-                              color: Colors.black,
-                              size: 23,
-                            ),
-                          ),
-                        ),
-                        filled: true,
-                        fillColor: Colors.white,
-                        contentPadding: const EdgeInsets.only(top: 10),
-                        border: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7),
-                          ),
-                          borderSide: BorderSide.none,
-                        ),
-                        enabledBorder: const OutlineInputBorder(
-                          borderRadius: BorderRadius.all(
-                            Radius.circular(7),
-                          ),
-                          borderSide:
-                              BorderSide(color: Colors.black38, width: 1),
-                        ),
-                        hintText: 'Search NexaMart.in',
-                        hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 17),
-                      ),
-                    ),
+          title: Center(
+            child: Row(
+              // mainAxisAlignment: MainAxisAlignment.center,
+              children: [
+                Container(
+                  alignment: Alignment.topLeft,
+                  child: Image.asset(
+                    'assets/images/logoNew.png',
+                    height: 50,
                   ),
                 ),
-              ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
+                SizedBox(
+                  width: 70,
                 ),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
+                const Text(
+                  'Order details',
+                  style: TextStyle(fontSize: 18),
                 ),
-              )
-            ],
+              ],
+            ),
           ),
+          // title: Row(
+          //   mainAxisAlignment: MainAxisAlignment.spaceBetween,
+          //   children: [
+          //     Expanded(
+          //       child: Container(
+          //         height: 42,
+          //         margin: const EdgeInsets.only(left: 15),
+          //         child: Material(
+          //           borderRadius: BorderRadius.circular(7),
+          //           elevation: 1,
+          //           child: TextFormField(
+          //             onFieldSubmitted: navigateToSearchScreen,
+          //             decoration: InputDecoration(
+          //               prefixIcon: InkWell(
+          //                 onTap: () {},
+          //                 child: const Padding(
+          //                   padding: EdgeInsets.only(left: 6),
+          //                   child: Icon(
+          //                     Icons.search,
+          //                     color: Colors.black,
+          //                     size: 23,
+          //                   ),
+          //                 ),
+          //               ),
+          //               filled: true,
+          //               fillColor: Colors.white,
+          //               contentPadding: const EdgeInsets.only(top: 10),
+          //               border: const OutlineInputBorder(
+          //                 borderRadius: BorderRadius.all(
+          //                   Radius.circular(7),
+          //                 ),
+          //                 borderSide: BorderSide.none,
+          //               ),
+          //               enabledBorder: const OutlineInputBorder(
+          //                 borderRadius: BorderRadius.all(
+          //                   Radius.circular(7),
+          //                 ),
+          //                 borderSide:
+          //                     BorderSide(color: Colors.black38, width: 1),
+          //               ),
+          //               hintText: 'Search Sahachari',
+          //               hintStyle: const TextStyle(
+          //                   fontWeight: FontWeight.w500, fontSize: 17),
+          //             ),
+          //           ),
+          //         ),
+          //       ),
+          //     ),
+          //     Container(
+          //       color: Colors.transparent,
+          //       height: 42,
+          //       margin: const EdgeInsets.symmetric(
+          //         horizontal: 10,
+          //       ),
+          //       child: const Icon(
+          //         Icons.mic,
+          //         color: Colors.black,
+          //         size: 25,
+          //       ),
+          //     )
+          //   ],
+          // ),
         ),
       ),
-      body: SingleChildScrollView(
-        child: Padding(
-          padding: const EdgeInsets.all(8.0),
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: [
-              const Text(
-                'View order details',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                width: double.infinity,
-                padding: const EdgeInsets.all(10),
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black12)),
-                child: Column(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: [
-                    Text(
-                      'Order Date:    ${DateFormat().format(
-                        DateTime.fromMillisecondsSinceEpoch(
-                            widget.order.orderedAt),
-                      )}',
-                    ),
-                    Text("Order ID:        ${widget.order.id}"),
-                    Text("Order Total:    \$${widget.order.totalPrice}")
-                  ],
+      body: SafeArea(
+        child: SingleChildScrollView(
+          child: Padding(
+            padding: const EdgeInsets.all(8.0),
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: [
+
+                Container(
+                  width: double.infinity,
+                  padding: const EdgeInsets.all(10),
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black12)),
+                  child: Column(
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: [
+                      Text(
+                        'Order Date:    ${DateFormat().format(
+                          DateTime.fromMillisecondsSinceEpoch(
+                              widget.order.orderedAt),
+                        )}',
+                      ),
+                      Text("Order ID:        ${widget.order.id}"),
+                      Text("Order Total:    \₹${widget.order.totalPrice}")
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Purchase Details',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                decoration:
-                    BoxDecoration(border: Border.all(color: Colors.black12)),
-                child: Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  children: [
-                    for (int i = 0; i < widget.order.products.length; i++)
-                      Row(
-                        children: [
-                          Image.network(
-                            widget.order.products[i].images[0],
-                            height: 120,
-                            width: 120,
-                          ),
-                          const SizedBox(
-                            width: 5,
-                          ),
-                          Expanded(
-                            child: Column(
-                              crossAxisAlignment: CrossAxisAlignment.start,
-                              children: [
-                                Text(
-                                  widget.order.products[i].name,
-                                  style: const TextStyle(
-                                      fontSize: 17,
-                                      fontWeight: FontWeight.bold),
-                                  maxLines: 2,
-                                  overflow: TextOverflow.ellipsis,
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Purchase Details',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  decoration:
+                      BoxDecoration(border: Border.all(color: Colors.black12)),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    children: [
+                      for (int i = 0; i < widget.order.products.length; i++)
+                        Row(
+                          children: [
+                            Padding(
+                              padding: const EdgeInsets.symmetric(vertical: 8),
+                              child: Container(
+                                child: Image.network(
+                                  widget.order.products[i].images[0],
+                                  height: 120,
+                                  width: 120,
                                 ),
-                              ],
+                              ),
                             ),
-                          )
-                        ],
-                      )
-                  ],
+                            const SizedBox(
+                              width: 5,
+                            ),
+                            Expanded(
+                              child: Column(
+                                crossAxisAlignment: CrossAxisAlignment.start,
+                                children: [
+                                  Text(
+                                    widget.order.products[i].name,
+                                    style: const TextStyle(
+                                        fontSize: 17,
+                                        fontWeight: FontWeight.bold),
+                                    maxLines: 2,
+                                    overflow: TextOverflow.ellipsis,
+                                  ),
+                                ],
+                              ),
+                            )
+                          ],
+                        )
+                    ],
+                  ),
                 ),
-              ),
-              const SizedBox(
-                height: 10,
-              ),
-              const Text(
-                'Tracking',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-              Container(
-                child: Stepper(
-                    currentStep: currentStep,
-                    controlsBuilder: (context, details) {
-                      if (user.type == 'admin') {
-                        return CustomButton(
-                          text: 'Done',
-                          onTap: () => changeOrderStatus(details.currentStep),
-                        );
-                      }
-                      return const SizedBox();
-                    },
-                    steps: [
-                      Step(
-                        title: const Text('Pending'),
-                        content: const Text(
-                          'Your Order is yet to be delivered',
+                const SizedBox(
+                  height: 10,
+                ),
+                const Text(
+                  'Tracking',
+                  style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                ),
+                Container(
+                  child: Stepper(
+                      currentStep: currentStep,
+                      controlsBuilder: (context, details) {
+                        if (user.type == 'admin') {
+                          return CustomButton(
+                            text: 'Done',
+                            onTap: () => changeOrderStatus(details.currentStep),
+                          );
+                        }
+                        return const SizedBox();
+                      },
+                      steps: [
+                        Step(
+                          title: const Text('Pending'),
+                          content: const Text(
+                            'Your Order is yet to be delivered',
+                          ),
+                          isActive: currentStep > 0,
+                          state: currentStep > 0
+                              ? StepState.complete
+                              : StepState.indexed,
                         ),
-                        isActive: currentStep > 0,
-                        state: currentStep > 0
-                            ? StepState.complete
-                            : StepState.indexed,
-                      ),
-                      Step(
-                        title: const Text('Delivered'),
-                        content: const Text(
-                          'Your Order has been delivered need to confirm',
+                        Step(
+                          title: const Text('Delivered'),
+                          content: const Text(
+                            'Your Order has been delivered need to confirm',
+                          ),
+                          isActive: currentStep > 1,
+                          state: currentStep > 1
+                              ? StepState.complete
+                              : StepState.indexed,
                         ),
-                        isActive: currentStep > 1,
-                        state: currentStep > 1
-                            ? StepState.complete
-                            : StepState.indexed,
-                      ),
-                      Step(
-                        title: const Text('Recieved'),
-                        content: const Text(
-                          'Your Order has been delivered and confirmed ',
+                        Step(
+                          title: const Text('Recieved'),
+                          content: const Text(
+                            'Your Order has been delivered and confirmed ',
+                          ),
+                          isActive: currentStep > 2,
+                          state: currentStep > 2
+                              ? StepState.complete
+                              : StepState.indexed,
                         ),
-                        isActive: currentStep > 2,
-                        state: currentStep > 2
-                            ? StepState.complete
-                            : StepState.indexed,
-                      ),
-                      Step(
-                        title: const Text('Delivered'),
-                        content: const Text(
-                          'Your Order is yet to be delivered and confirmed!',
+                        Step(
+                          title: const Text('Delivered'),
+                          content: const Text(
+                            'Your Order is yet to be delivered and confirmed!',
+                          ),
+                          isActive: currentStep >= 3,
+                          state: currentStep >= 3
+                              ? StepState.complete
+                              : StepState.indexed,
                         ),
-                        isActive: currentStep >= 3,
-                        state: currentStep >= 3
-                            ? StepState.complete
-                            : StepState.indexed,
-                      ),
-                    ]),
-              )
-            ],
+                      ]),
+                )
+              ],
+            ),
           ),
         ),
       ),

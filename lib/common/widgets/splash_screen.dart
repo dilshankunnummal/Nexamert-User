@@ -44,8 +44,6 @@ class _SplashScreenState extends State<SplashScreen>
         if (userProvider.user.token.isNotEmpty) {
           if (userProvider.user.type == 'user') {
             Navigator.of(context).pushReplacementNamed(BottomBar.routeName);
-          } else {
-            Navigator.of(context).pushReplacementNamed(AdminScreen.routeName);
           }
         } else {
           Navigator.of(context).pushReplacementNamed(BottomBar.routeName);

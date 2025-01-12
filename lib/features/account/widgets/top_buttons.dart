@@ -31,15 +31,15 @@ class _TopButtonsState extends State<TopButtons> {
     final userProvider = Provider.of<UserProvider>(context, listen: false);
     return Column(
       children: [
-        Row(
-          children: [
-            AccountButton(text: 'Your Orders', onTap: () {}),
-            AccountButton(text: 'Profile', onTap: () {})
-          ],
-        ),
-        const SizedBox(
-          height: 10,
-        ),
+        // Row(
+        //   children: [
+        //     AccountButton(text: 'Your Orders', onTap: () {}),
+        //     AccountButton(text: 'Profile', onTap: () {})
+        //   ],
+        // ),
+        // const SizedBox(
+        //   height: 10,
+        // ),
         Row(
           children: [
             userProvider.user.token.isNotEmpty
@@ -51,7 +51,7 @@ class _TopButtonsState extends State<TopButtons> {
                     onTap: () => navigateToAuthScreen(),
                     text: 'Login',
                   ),
-            AccountButton(text: 'Your Wish List', onTap: () {})
+            // AccountButton(text: 'Your Wish List', onTap: () {})
           ],
         )
       ],

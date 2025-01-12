@@ -93,7 +93,7 @@ class _HomeScreenState extends State<HomeScreen> {
                           borderSide:
                               BorderSide(color: Colors.black12, width: 1),
                         ),
-                        hintText: 'Search NexaMart.in',
+                        hintText: 'Search Sahachari',
                         hintStyle: const TextStyle(
                             color: Colors.grey, fontSize: 14),
                       ),

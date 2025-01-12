@@ -4,6 +4,7 @@ import 'package:flutter/material.dart';
 import 'dart:typed_data';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nexamart_user/common/widgets/custon_button.dart';
+import 'package:nexamart_user/common/widgets/show_login_alert.dart';
 import 'package:nexamart_user/common/widgets/stars.dart';
 import 'package:nexamart_user/constants/global_variables.dart';
 import 'package:nexamart_user/constants/utils.dart';
@@ -132,26 +133,26 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                           borderSide:
                               BorderSide(color: Colors.black38, width: 1),
                         ),
-                        hintText: 'Search NexaMart.in',
+                        hintText: 'Search Sahachari',
                         hintStyle: const TextStyle(
-                            fontWeight: FontWeight.w500, fontSize: 17),
+                            color: Colors.grey, fontSize: 17),
                       ),
                     ),
                   ),
                 ),
               ),
-              Container(
-                color: Colors.transparent,
-                height: 42,
-                margin: const EdgeInsets.symmetric(
-                  horizontal: 10,
-                ),
-                child: const Icon(
-                  Icons.mic,
-                  color: Colors.black,
-                  size: 25,
-                ),
-              )
+              // Container(
+              //   color: Colors.transparent,
+              //   height: 42,
+              //   margin: const EdgeInsets.symmetric(
+              //     horizontal: 10,
+              //   ),
+              //   child: const Icon(
+              //     Icons.mic,
+              //     color: Colors.black,
+              //     size: 25,
+              //   ),
+              // )
             ],
           ),
         ),
@@ -168,19 +169,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   // Text(
                   //   widget.product.id!,
                   // ),
-                  Stars(rating: avgRating),
+                  Stars(rating: avgRating, itemSize: 18,),
                 ],
               ),
             ),
-            Padding(
-              padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
-              child: Text(
-                widget.product.name,
-                style: const TextStyle(
-                  fontSize: 15,
-                ),
-              ),
-            ),
+            // Padding(
+            //   padding: const EdgeInsets.symmetric(vertical: 20, horizontal: 10),
+            //   child: Text(
+            //     widget.product.name,
+            //     style: const TextStyle(
+            //       fontSize: 15,
+            //     ),
+            //   ),
+            // ),
             // PageView instead of CarouselSlider
             SizedBox(
               height: 300, // Set the height to fit your design
@@ -199,6 +200,16 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               height: 5,
             ),
             Padding(
+              padding: const EdgeInsets.fromLTRB(8, 8, 8, 0),
+              child: Text(
+                widget.product.name,
+                style: const TextStyle(
+                  fontSize: 18,
+
+                ),
+              ),
+            ),
+            Padding(
               padding: const EdgeInsets.all(8),
               child: RichText(
                 text: TextSpan(
@@ -209,7 +220,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                       fontWeight: FontWeight.bold),
                   children: [
                     TextSpan(
-                      text: '\$${widget.product.price}',
+                      text: '\₹ ${widget.product.price}',
                       style: const TextStyle(
                           fontSize: 22,
                           color: Colors.red,
@@ -220,8 +231,47 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.all(8.0),
-              child: Text(widget.product.description),
+              padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+              child: Text(widget.product.description, style: TextStyle(
+                fontSize: 14
+              ),),
+            ),
+
+            const Padding(
+              padding: EdgeInsets.symmetric(horizontal: 8.0),
+              child: Text(
+                'Rate the Product',
+                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+              ),
+            ),
+            userProvider.token.isNotEmpty
+                ? RatingBar.builder(
+              initialRating: myRating,
+              minRating: 1,
+              direction: Axis.horizontal,
+              allowHalfRating: true,
+              itemCount: 5,
+              itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+              itemBuilder: (context, _) => const Icon(
+                Icons.star,
+                color: Color.fromARGB(255, 238, 176, 82),
+              ),
+              onRatingUpdate: (rating) {
+                productDetailsServices.rateProducts(
+                    context: context,
+                    product: widget.product,
+                    rating: rating);
+              },
+            )
+                : InkWell(
+              onTap: () => showLoginAlert(context),
+              child: Stars(
+                rating: avgRating,
+                itemSize: 45,
+              ),
+            ),
+            SizedBox(
+              height: 8,
             ),
             Container(
               color: Colors.black12,
@@ -245,50 +295,50 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 text: 'Add to Cart',
                 onTap: () => userProvider.token.isNotEmpty
                     ? addToCart()
-                    : showSnackbar(context, 'Please Login'),
+                    : showLoginAlert(context),
                 color: const Color.fromARGB(255, 252, 150, 67),
               ),
             ),
             const SizedBox(
               height: 10,
             ),
-            Container(
-              color: Colors.black12,
-              height: 5,
-            ),
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 10.0),
-              child: Text(
-                'Rate the Product',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
-              ),
-            ),
-            userProvider.token.isNotEmpty
-                ? RatingBar.builder(
-                    initialRating: myRating,
-                    minRating: 1,
-                    direction: Axis.horizontal,
-                    allowHalfRating: true,
-                    itemCount: 5,
-                    itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-                    itemBuilder: (context, _) => const Icon(
-                      Icons.star,
-                      color: Color.fromARGB(255, 238, 176, 82),
-                    ),
-                    onRatingUpdate: (rating) {
-                      productDetailsServices.rateProducts(
-                          context: context,
-                          product: widget.product,
-                          rating: rating);
-                    },
-                  )
-                : InkWell(
-                    onTap: () => showSnackbar(context, 'Please Login'),
-                    child: Stars(
-                      rating: avgRating,
-                      itemSize: 45,
-                    ),
-                  )
+            // Container(
+            //   color: Colors.black12,
+            //   height: 5,
+            // ),
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 10.0),
+            //   child: Text(
+            //     'Rate the Product',
+            //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // userProvider.token.isNotEmpty
+            //     ? RatingBar.builder(
+            //         initialRating: myRating,
+            //         minRating: 1,
+            //         direction: Axis.horizontal,
+            //         allowHalfRating: true,
+            //         itemCount: 5,
+            //         itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+            //         itemBuilder: (context, _) => const Icon(
+            //           Icons.star,
+            //           color: Color.fromARGB(255, 238, 176, 82),
+            //         ),
+            //         onRatingUpdate: (rating) {
+            //           productDetailsServices.rateProducts(
+            //               context: context,
+            //               product: widget.product,
+            //               rating: rating);
+            //         },
+            //       )
+            //     : InkWell(
+            //         onTap: () => showSnackbar(context, 'Please Login'),
+            //         child: Stars(
+            //           rating: avgRating,
+            //           itemSize: 45,
+            //         ),
+            //       )
           ],
         ),
       ),

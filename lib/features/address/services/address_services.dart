@@ -8,6 +8,7 @@ import 'package:http/http.dart' as http;
 import 'package:nexamart_user/constants/error_handling.dart';
 import 'package:nexamart_user/constants/global_variables.dart';
 import 'package:nexamart_user/constants/utils.dart';
+import 'package:nexamart_user/features/account/screens/account_screen.dart';
 import 'package:nexamart_user/models/user.dart';
 import 'package:nexamart_user/provider/user_provider.dart';
 // import 'package:nexamart/models/user.dart';
@@ -77,6 +78,9 @@ class AddressServices {
             showSnackbar(context, 'Order has been placed');
             User user = userProvider.user.copyWith(cart: []);
             userProvider.setUserFromModel(user);
+            Navigator.pushReplacement(context, MaterialPageRoute(
+              builder: (context) => AccountScreen(), // Replace OrderScreen with your actual screen widget
+            ),);
           });
     } catch (e) {
       showSnackbar(

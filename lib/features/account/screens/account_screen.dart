@@ -16,7 +16,7 @@ class AccountScreen extends StatelessWidget {
     return Scaffold(
       backgroundColor: GlobalVariables.greyBackgroundCOlor,
       appBar: PreferredSize(
-        preferredSize: const Size.fromHeight(50),
+        preferredSize: const Size.fromHeight(60),
         child: AppBar(
           flexibleSpace: Container(
             decoration: const BoxDecoration(
@@ -26,14 +26,14 @@ class AccountScreen extends StatelessWidget {
           title: Row(
             mainAxisAlignment: MainAxisAlignment.spaceBetween,
             children: [
-              Container(
-                alignment: Alignment.topLeft,
-                child: Image.asset(
-                  'assets/images/Logo.png',
-                  width: 120,
-                  height: 100,
-                ),
-              ),
+              // Container(
+              //   alignment: Alignment.topLeft,
+              //   child: Image.asset(
+              //     'assets/images/logoNew.png',
+              //     width: 60,
+              //     height: 60,
+              //   ),
+              // ),
               // Container(
               //   padding: const EdgeInsets.only(left: 15, right: 15),
               //   child: const Row(
@@ -50,20 +50,22 @@ class AccountScreen extends StatelessWidget {
           ),
         ),
       ),
-      body: Column(
-        children: [
-          const BelowAppBar(),
-          Container(
-            color: GlobalVariables.secondaryColor,
-            height: 1,
-          ),
-          const SizedBox(
-            height: 10,
-          ),
-          const TopButtons(),
-          const SizedBox(height: 20),
-          const Orders()
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          children: [
+            const BelowAppBar(),
+            Container(
+              color: GlobalVariables.secondaryColor,
+              height: 1,
+            ),
+            const SizedBox(
+              height: 10,
+            ),
+            const TopButtons(),
+            const SizedBox(height: 20),
+            const Orders()
+          ],
+        ),
       ),
     );
   }

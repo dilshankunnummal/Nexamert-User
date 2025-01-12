@@ -76,11 +76,11 @@ Route<dynamic> generateRoute(RouteSettings routeSettings) {
           order: order,
         ),
       );
-    case AdminScreen.routeName:
-      return MaterialPageRoute(
-        settings: routeSettings,
-        builder: (_) => const AdminScreen(),
-      );
+    // case AdminScreen.routeName:
+    //   return MaterialPageRoute(
+    //     settings: routeSettings,
+    //     builder: (_) => const AdminScreen(),
+    //   );
     default:
       return MaterialPageRoute(
         settings: routeSettings,
