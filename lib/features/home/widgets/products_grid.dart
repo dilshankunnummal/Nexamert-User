@@ -1,5 +1,3 @@
-import 'dart:convert'; // Import this to decode base64 images
-import 'dart:typed_data';
 import 'package:flutter/material.dart';
 import '../../../common/widgets/loader.dart';
 import '../../../models/product.dart';
@@ -43,32 +41,32 @@ class _ProductsGridState extends State<ProductsGrid> {
   Widget build(BuildContext context) {
     return products == null
         ? Padding(
-          padding: const EdgeInsets.only(top: 20),
-          child: const Loader(),
-        )
+            padding: const EdgeInsets.only(top: 20),
+            child: const Loader(),
+          )
         : products?.length == 0
-        ? const SizedBox()
-        : Padding(
-      padding: const EdgeInsets.all(8.0),
-      child: GridView.builder(
-        shrinkWrap: true,
-        physics: const NeverScrollableScrollPhysics(),
-        gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
-          crossAxisCount: 2,
-          crossAxisSpacing: 8,
-          mainAxisSpacing: 8,
-          childAspectRatio: 0.7,
-        ),
-        itemCount: products?.length,
-        itemBuilder: (context, index) {
-          final product = products?[index];
-          return ProductCard(
-            product: product!,
-            navigateToDetailScreen: navigateToDetailScreen,
-          );
-        },
-      ),
-    );
+            ? const SizedBox()
+            : Padding(
+                padding: const EdgeInsets.all(8.0),
+                child: GridView.builder(
+                  shrinkWrap: true,
+                  physics: const NeverScrollableScrollPhysics(),
+                  gridDelegate: const SliverGridDelegateWithFixedCrossAxisCount(
+                    crossAxisCount: 2,
+                    crossAxisSpacing: 8,
+                    mainAxisSpacing: 8,
+                    childAspectRatio: 0.7,
+                  ),
+                  itemCount: products?.length,
+                  itemBuilder: (context, index) {
+                    final product = products?[index];
+                    return ProductCard(
+                      product: product!,
+                      navigateToDetailScreen: navigateToDetailScreen,
+                    );
+                  },
+                ),
+              );
   }
 }
 
@@ -101,7 +99,8 @@ class ProductCard extends StatelessWidget {
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
             ClipRRect(
-              borderRadius: const BorderRadius.vertical(top: Radius.circular(5)),
+              borderRadius:
+                  const BorderRadius.vertical(top: Radius.circular(5)),
               child: Image.network(
                 product.images.first,
                 height: 120,

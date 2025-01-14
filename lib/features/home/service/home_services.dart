@@ -106,21 +106,21 @@ class HomeServices {
       );
 
       httpErrorHandle(
-        response: res,
-        context: context,
-        onSuccess: () {
-          for (int i = 0; i < jsonDecode(res.body).length; i++) {
-            products.add(
-              Product.fromJson(
-                jsonEncode(
-                  jsonDecode(
-                    res.body,
-                  )[i],
+          response: res,
+          context: context,
+          onSuccess: () {
+            for (int i = 0; i < jsonDecode(res.body).length; i++) {
+              products.add(
+                Product.fromJson(
+                  jsonEncode(
+                    jsonDecode(
+                      res.body,
+                    )[i],
+                  ),
                 ),
-              ),
-            );
-          }
-        });
+              );
+            }
+          });
       print(products[0].images.first.length);
     } catch (e) {
       print('Error: $e');

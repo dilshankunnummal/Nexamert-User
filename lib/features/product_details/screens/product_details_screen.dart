@@ -1,13 +1,9 @@
-import 'dart:convert';
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'dart:typed_data';
 import 'package:flutter_rating_bar/flutter_rating_bar.dart';
 import 'package:nexamart_user/common/widgets/custon_button.dart';
 import 'package:nexamart_user/common/widgets/show_login_alert.dart';
 import 'package:nexamart_user/common/widgets/stars.dart';
 import 'package:nexamart_user/constants/global_variables.dart';
-import 'package:nexamart_user/constants/utils.dart';
 import 'package:nexamart_user/features/address/screens/address_screen.dart';
 import 'package:nexamart_user/features/product_details/services/product_details_services.dart';
 import 'package:nexamart_user/features/search/screens/search_screen.dart';
@@ -66,7 +62,6 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
       avgRating = totalRating / widget.product.rating!.length;
     }
   }
-
 
   //Base64Image Convertion
   // Uint8List convertedImage(String img){
@@ -134,8 +129,8 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                               BorderSide(color: Colors.black38, width: 1),
                         ),
                         hintText: 'Search Sahachari',
-                        hintStyle: const TextStyle(
-                            color: Colors.grey, fontSize: 17),
+                        hintStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 17),
                       ),
                     ),
                   ),
@@ -169,7 +164,10 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                   // Text(
                   //   widget.product.id!,
                   // ),
-                  Stars(rating: avgRating, itemSize: 18,),
+                  Stars(
+                    rating: avgRating,
+                    itemSize: 18,
+                  ),
                 ],
               ),
             ),
@@ -204,19 +202,19 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
               child: Text(
                 widget.product.name,
                 style: const TextStyle(
-                  fontSize: 18,
-
-                ),
+                    fontSize: 28,
+                    fontWeight: FontWeight.bold,
+                    color: Colors.black),
               ),
             ),
             Padding(
               padding: const EdgeInsets.all(8),
               child: RichText(
                 text: TextSpan(
-                  text: 'Deal Price: ',
+                  text: 'Deal Price : ',
                   style: const TextStyle(
-                      fontSize: 16,
-                      color: Colors.black,
+                      fontSize: 20,
+                      color: Colors.blueGrey,
                       fontWeight: FontWeight.bold),
                   children: [
                     TextSpan(
@@ -232,44 +230,58 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
             ),
             Padding(
               padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
-              child: Text(widget.product.description, style: TextStyle(
-                fontSize: 14
-              ),),
-            ),
-
-            const Padding(
-              padding: EdgeInsets.symmetric(horizontal: 8.0),
               child: Text(
-                'Rate the Product',
-                style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+                widget.product.category,
+                style: TextStyle(fontSize: 18, color: Colors.blueGrey),
               ),
             ),
-            userProvider.token.isNotEmpty
-                ? RatingBar.builder(
-              initialRating: myRating,
-              minRating: 1,
-              direction: Axis.horizontal,
-              allowHalfRating: true,
-              itemCount: 5,
-              itemPadding: const EdgeInsets.symmetric(horizontal: 4),
-              itemBuilder: (context, _) => const Icon(
-                Icons.star,
-                color: Color.fromARGB(255, 238, 176, 82),
-              ),
-              onRatingUpdate: (rating) {
-                productDetailsServices.rateProducts(
-                    context: context,
-                    product: widget.product,
-                    rating: rating);
-              },
-            )
-                : InkWell(
-              onTap: () => showLoginAlert(context),
-              child: Stars(
-                rating: avgRating,
-                itemSize: 45,
-              ),
-            ),
+            Padding(
+                padding: const EdgeInsets.fromLTRB(8, 0, 8, 8),
+                child: widget.product.quantity != 0
+                    ? Text(
+                        'Available : ${widget.product.quantity.toString()}',
+                        style:
+                            TextStyle(fontSize: 18, color: Color(0xFF388E3C)),
+                      )
+                    : Text(
+                        'Not Available',
+                        style:
+                            TextStyle(fontSize: 18, color: Colors.orangeAccent),
+                      )),
+
+            // const Padding(
+            //   padding: EdgeInsets.symmetric(horizontal: 8.0),
+            //   child: Text(
+            //     'Rate the Product',
+            //     style: TextStyle(fontSize: 22, fontWeight: FontWeight.bold),
+            //   ),
+            // ),
+            // userProvider.token.isNotEmpty
+            //     ? RatingBar.builder(
+            //         initialRating: myRating,
+            //         minRating: 1,
+            //         direction: Axis.horizontal,
+            //         allowHalfRating: true,
+            //         itemCount: 5,
+            //         itemPadding: const EdgeInsets.symmetric(horizontal: 4),
+            //         itemBuilder: (context, _) => const Icon(
+            //           Icons.star,
+            //           color: Color.fromARGB(255, 238, 176, 82),
+            //         ),
+            //         onRatingUpdate: (rating) {
+            //           productDetailsServices.rateProducts(
+            //               context: context,
+            //               product: widget.product,
+            //               rating: rating);
+            //         },
+            //       )
+            //     : InkWell(
+            //         onTap: () => showLoginAlert(context),
+            //         child: Stars(
+            //           rating: avgRating,
+            //           itemSize: 45,
+            //         ),
+            //       ),
             SizedBox(
               height: 8,
             ),
@@ -296,7 +308,7 @@ class _ProductDetailsScreenState extends State<ProductDetailsScreen> {
                 onTap: () => userProvider.token.isNotEmpty
                     ? addToCart()
                     : showLoginAlert(context),
-                color: const Color.fromARGB(255, 252, 150, 67),
+                color: GlobalVariables.secondaryColor,
               ),
             ),
             const SizedBox(

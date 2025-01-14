@@ -1,5 +1,6 @@
-import 'dart:convert';
+// ignore_for_file: use_build_context_synchronously
 
+import 'dart:convert';
 import 'package:flutter/material.dart';
 import 'package:http/http.dart' as http;
 import 'package:nexamart_user/constants/error_handling.dart';
@@ -8,12 +9,6 @@ import 'package:nexamart_user/constants/utils.dart';
 import 'package:nexamart_user/models/product.dart';
 import 'package:nexamart_user/models/user.dart';
 import 'package:nexamart_user/provider/user_provider.dart';
-// import 'package:nexamart/constants/error_handling.dart';
-// import 'package:nexamart/constants/global_variables.dart';
-// import 'package:nexamart/constants/utils.dart';
-// import 'package:nexamart/models/product.dart';
-// import 'package:nexamart/models/user.dart';
-// import 'package:nexamart/provider/user_provider.dart';
 import 'package:provider/provider.dart';
 
 class ProductDetailsServices {

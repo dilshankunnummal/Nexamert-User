@@ -22,11 +22,11 @@ class HomeScreen extends StatefulWidget {
 }
 
 class _HomeScreenState extends State<HomeScreen> {
-
   void navigateToSearchScreen(String query) {
     Navigator.pushNamed(context, SearchScreen.routeName, arguments: query);
   }
 
+  final searchController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -55,11 +55,14 @@ class _HomeScreenState extends State<HomeScreen> {
                     borderRadius: BorderRadius.circular(7),
                     elevation: 1,
                     child: TextFormField(
+                      controller: searchController,
                       onFieldSubmitted: navigateToSearchScreen,
                       decoration: InputDecoration(
                         // prefixIcon: const SizedBox(),
                         suffixIcon: InkWell(
-                          onTap: () {},
+                          onTap: () {
+                            navigateToSearchScreen(searchController.text);
+                          },
                           child: Container(
                             decoration: const BoxDecoration(
                               borderRadius: BorderRadius.only(
@@ -94,8 +97,8 @@ class _HomeScreenState extends State<HomeScreen> {
                               BorderSide(color: Colors.black12, width: 1),
                         ),
                         hintText: 'Search Sahachari',
-                        hintStyle: const TextStyle(
-                            color: Colors.grey, fontSize: 14),
+                        hintStyle:
+                            const TextStyle(color: Colors.grey, fontSize: 14),
                       ),
                     ),
                   ),

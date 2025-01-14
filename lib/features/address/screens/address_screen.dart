@@ -119,7 +119,7 @@ class _AddressScreenState extends State<AddressScreen> {
     }
   }
 
-  void placeOrder(String address){
+  void placeOrder(String address) {
     payPressed(address);
 
     onApplePayResult(null);
@@ -153,11 +153,7 @@ class _AddressScreenState extends State<AddressScreen> {
           ),
           title: Container(
             alignment: Alignment.topLeft,
-            child: Image.asset(
-              'assets/images/Logo.png',
-              width: 120,
-              height: 60,
-            ),
+            child: Text('Add Address'),
           ),
         ),
       ),
@@ -228,13 +224,11 @@ class _AddressScreenState extends State<AddressScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    
-                    CustomButton(text: 'Buy', onTap: ()=> placeOrder(address) )
-                    
+                    CustomButton(text: 'Buy', onTap: () => placeOrder(address))
                   ],
                 ),
               ),
-              
+
               // ApplePayButton(
               //   onPressed: () {
               //     payPressed(address);

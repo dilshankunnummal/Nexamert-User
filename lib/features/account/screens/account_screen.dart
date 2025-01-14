@@ -24,28 +24,17 @@ class AccountScreen extends StatelessWidget {
             ),
           ),
           title: Row(
-            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            spacing: 20,
             children: [
-              // Container(
-              //   alignment: Alignment.topLeft,
-              //   child: Image.asset(
-              //     'assets/images/logoNew.png',
-              //     width: 60,
-              //     height: 60,
-              //   ),
-              // ),
-              // Container(
-              //   padding: const EdgeInsets.only(left: 15, right: 15),
-              //   child: const Row(
-              //     children: [
-              //       Padding(
-              //         padding: EdgeInsets.only(right: 15),
-              //         child: Icon(Icons.notifications_outlined),
-              //       ),
-              //       Icon(Icons.search),
-              //     ],
-              //   ),
-              // )
+              Container(
+                alignment: Alignment.topLeft,
+                child: Image.asset(
+                  'assets/images/logoNew.png',
+                  width: 60,
+                  height: 60,
+                ),
+              ),
+              Text('Profile')
             ],
           ),
         ),

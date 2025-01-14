@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 
-String uri = 'https://nexamart-server.onrender.com';
+String uri = 'http://34.207.150.19:5000';
 
 class GlobalVariables {
   static const appBarGradient = LinearGradient(
