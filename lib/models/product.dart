@@ -3,8 +3,6 @@ import 'dart:convert';
 
 import 'package:nexamart_user/models/rating.dart';
 
-// import 'package:nexamart/models/rating.dart';
-
 class Product {
   final String name;
   final String description;
@@ -14,6 +12,7 @@ class Product {
   final double price;
   String? id;
   String? userId;
+  String? adminId; // Added adminId property
   final List<Rating>? rating;
 
   Product({
@@ -25,6 +24,7 @@ class Product {
     required this.price,
     this.id,
     this.userId,
+    this.adminId,
     this.rating,
   });
 
@@ -38,6 +38,7 @@ class Product {
       'price': price,
       'id': id,
       'userId': userId,
+      'adminId': adminId, // Added adminId to map
       'rating': rating?.map((x) => x.toMap()).toList(),
     };
   }
@@ -52,6 +53,9 @@ class Product {
       price: (map['price'] as num).toDouble(), // Cast to double
       id: map['_id'] != null ? map['_id'] as String : null,
       userId: map['userId'] != null ? map['userId'] as String : null,
+      adminId: map['adminId'] != null
+          ? map['adminId'] as String
+          : null, // Added adminId mapping
       rating: map['ratings'] != null
           ? List<Rating>.from(
               map['ratings']?.map((x) => Rating.fromMap(x)),
@@ -74,6 +78,7 @@ class Product {
     double? price,
     String? id,
     String? userId,
+    String? adminId, // Added adminId to copyWith method
     List<Rating>? rating,
   }) {
     return Product(
@@ -85,6 +90,7 @@ class Product {
       price: price ?? this.price,
       id: id ?? this.id,
       userId: userId ?? this.userId,
+      adminId: adminId ?? this.adminId, // Updated adminId
       rating: rating ?? this.rating,
     );
   }

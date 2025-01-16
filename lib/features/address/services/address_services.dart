@@ -8,6 +8,7 @@ import 'package:nexamart_user/common/widgets/bottom_bar.dart';
 import 'package:nexamart_user/constants/error_handling.dart';
 import 'package:nexamart_user/constants/global_variables.dart';
 import 'package:nexamart_user/constants/utils.dart';
+import 'package:nexamart_user/models/product.dart';
 import 'package:nexamart_user/models/user.dart';
 import 'package:nexamart_user/provider/user_provider.dart';
 import 'package:provider/provider.dart';
@@ -58,17 +59,21 @@ class AddressServices {
     );
 
     try {
-      // Extract adminId from the first product in the cart (if needed for all, handle differently)
-      // String? adminId = userProvider.user.cart.isNotEmpty
-      //     ? Product.fromMap(userProvider.user.cart.first).adminId
-      //     : null;
-
-      // print(adminId);
-      // Prepare the cart without modification
+      // Extract the adminId for each product in the cart
       List<Map<String, dynamic>> cartWithDetails =
           userProvider.user.cart.map((item) {
-        return Map<String, dynamic>.from(item); // Ensure it's properly mapped
+        // Explicitly cast 'item' to Map<String, dynamic>
+        final product = Product.fromMap(item['product']);
+        return {
+          ...item as Map<String, dynamic>, // Cast 'item' here
+          'product': product.toMap(),
+          'adminId': product.adminId, // Add the adminId explicitly here
+        };
       }).toList();
+
+      // Prepare a list of unique adminIds (if necessary)
+      List<dynamic> uniqueAdminIds =
+          cartWithDetails.map((item) => item['adminId']).toSet().toList();
 
       // Make the HTTP request
       http.Response res = await http.post(
@@ -78,10 +83,13 @@ class AddressServices {
           'x-auth-token': userProvider.user.token,
         },
         body: jsonEncode({
-          'cart': cartWithDetails, // Full cart data
+          'cart': cartWithDetails, // Full cart data with adminId included
           'address': address,
           'totalPrice': totalSum,
-          // 'adminId': adminId, // Add adminId to the top-level object
+          'adminId': uniqueAdminIds.isNotEmpty
+              ? uniqueAdminIds
+                  .first // Use the first adminId (or handle as needed)
+              : null,
         }),
       );
 
