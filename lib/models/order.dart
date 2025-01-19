@@ -7,7 +7,7 @@ import 'product.dart';
 
 class Order {
   final String id;
-  final List<Product>   products;
+  final List<Product>products;
   final List<int> quantity;
   final String address;
   final String userId;

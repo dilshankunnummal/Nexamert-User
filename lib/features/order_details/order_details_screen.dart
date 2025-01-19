@@ -247,7 +247,7 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                         Step(
                           title: const Text('Pending'),
                           content: const Text(
-                            'Your Order is yet to be delivered',
+                            'Your Order is yet to be Out for Delivered',
                           ),
                           isActive: currentStep > 0,
                           state: currentStep > 0
@@ -255,9 +255,9 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               : StepState.indexed,
                         ),
                         Step(
-                          title: const Text('Delivered'),
+                          title: const Text('Out for Delivery'),
                           content: const Text(
-                            'Your Order has been delivered need to confirm',
+                            'The order is with the delivery partner and on its way to the customer',
                           ),
                           isActive: currentStep > 1,
                           state: currentStep > 1
@@ -265,25 +265,25 @@ class _OrderDetailsScreenState extends State<OrderDetailsScreen> {
                               : StepState.indexed,
                         ),
                         Step(
-                          title: const Text('Recieved'),
+                          title: const Text('Delivered'),
                           content: const Text(
-                            'Your Order has been delivered and confirmed ',
+                            'The order has been successfully delivered to the customer',
                           ),
                           isActive: currentStep > 2,
                           state: currentStep > 2
                               ? StepState.complete
                               : StepState.indexed,
                         ),
-                        Step(
-                          title: const Text('Delivered'),
-                          content: const Text(
-                            'Your Order is yet to be delivered and confirmed!',
-                          ),
-                          isActive: currentStep >= 3,
-                          state: currentStep >= 3
-                              ? StepState.complete
-                              : StepState.indexed,
-                        ),
+                        // Step(
+                        //   title: const Text('Delivered'),
+                        //   content: const Text(
+                        //     'Your Order is yet to be delivered and confirmed!',
+                        //   ),
+                        //   isActive: currentStep >= 3,
+                        //   state: currentStep >= 3
+                        //       ? StepState.complete
+                        //       : StepState.indexed,
+                        // ),
                       ]),
                 )
               ],

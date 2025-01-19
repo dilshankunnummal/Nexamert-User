@@ -25,9 +25,10 @@ class _AuthScreenState extends State<AuthScreen> {
   final AuthService authService = AuthService();
   final TextEditingController _emailController = TextEditingController();
   final TextEditingController _passwordController = TextEditingController();
-  final TextEditingController _confirmPasswordController =
-  TextEditingController();
-  final TextEditingController _addressController = TextEditingController();
+  final TextEditingController _confirmPasswordController = TextEditingController();
+  final TextEditingController _numberController = TextEditingController();
+  // final TextEditingController _pincodeController = TextEditingController();
+  final TextEditingController _pincodeController = TextEditingController();
   final TextEditingController _nameController = TextEditingController();
 
   @override
@@ -35,7 +36,7 @@ class _AuthScreenState extends State<AuthScreen> {
     _emailController.dispose();
     _passwordController.dispose();
     _confirmPasswordController.dispose();
-    _addressController.dispose();
+    _pincodeController.dispose();
     _nameController.dispose();
     super.dispose();
   }
@@ -45,7 +46,7 @@ class _AuthScreenState extends State<AuthScreen> {
       name: _nameController.text,
       email: _emailController.text,
       password: _passwordController.text,
-      address: _addressController.text,
+      pincode: _pincodeController.text,
       context: context,
     );
   }
@@ -115,7 +116,7 @@ class _AuthScreenState extends State<AuthScreen> {
                         ),
                         const SizedBox(height: 10),
                         CustomTextfield(
-                          controller: _addressController,
+                          controller: _pincodeController,
                           hintText: 'Pincode',
                           keyboardType: TextInputType.number,
                         ),
@@ -126,6 +127,9 @@ class _AuthScreenState extends State<AuthScreen> {
                           keyboardType: TextInputType.text,
                           obscureText: true,
                         ),
+                        const SizedBox(height: 10),
+                        CustomTextfield(controller: _numberController, hintText: 'Mobile Number', keyboardType: TextInputType.number,),
+
                         const SizedBox(height: 10),
                         CustomTextfield(
                           controller: _confirmPasswordController,

@@ -68,7 +68,7 @@ class _AddressScreenState extends State<AddressScreen> {
   void onApplePayResult(res) {
     if (Provider.of<UserProvider>(context, listen: false)
         .user
-        .address
+        .pincode
         .isEmpty) {
       addressServices.saveUserAdress(
           context: context, address: addressToBeUsed);
@@ -83,7 +83,7 @@ class _AddressScreenState extends State<AddressScreen> {
   void onGooglePayResult(res) {
     if (Provider.of<UserProvider>(context, listen: false)
         .user
-        .address
+        .pincode
         .isEmpty) {
       addressServices.saveUserAdress(
           context: context, address: addressToBeUsed);
@@ -172,7 +172,7 @@ class _AddressScreenState extends State<AddressScreen> {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Text(
-                          address,
+                          address as String,
                           style: const TextStyle(
                             fontSize: 18,
                           ),
@@ -224,7 +224,7 @@ class _AddressScreenState extends State<AddressScreen> {
                     const SizedBox(
                       height: 10,
                     ),
-                    CustomButton(text: 'Buy', onTap: () => placeOrder(address))
+                    CustomButton(text: 'Buy', onTap: () => placeOrder(address as String))
                   ],
                 ),
               ),

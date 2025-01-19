@@ -61,8 +61,8 @@ class AddressServices {
     try {
       // Extract the adminId for each product in the cart
       List<Map<String, dynamic>> cartWithDetails =
-          userProvider.user.cart.map((item) {
-        // Explicitly cast 'item' to Map<String, dynamic>
+      userProvider.user.cart.map((item) {
+        // Explicitly cast 'item' to Map<String, dynamic'
         final product = Product.fromMap(item['product']);
         return {
           ...item as Map<String, dynamic>, // Cast 'item' here
@@ -71,9 +71,15 @@ class AddressServices {
         };
       }).toList();
 
+      // Print the cart with details
+      print('Cart with details: $cartWithDetails');
+
       // Prepare a list of unique adminIds (if necessary)
       List<dynamic> uniqueAdminIds =
-          cartWithDetails.map((item) => item['adminId']).toSet().toList();
+      cartWithDetails.map((item) => item['adminId']).toSet().toList();
+
+      // Print unique admin IDs
+      print('Unique admin IDs: $uniqueAdminIds');
 
       // Make the HTTP request
       http.Response res = await http.post(
@@ -87,11 +93,12 @@ class AddressServices {
           'address': address,
           'totalPrice': totalSum,
           'adminId': uniqueAdminIds.isNotEmpty
-              ? uniqueAdminIds
-                  .first // Use the first adminId (or handle as needed)
+              ? uniqueAdminIds // Use the first adminId (or handle as needed)
               : null,
         }),
       );
+
+      print('Response body: ${res.body}');
 
       // Handle the response
       httpErrorHandle(
@@ -104,8 +111,7 @@ class AddressServices {
           Navigator.pushReplacement(
             context,
             MaterialPageRoute(
-              builder: (context) =>
-                  BottomBar(), // Replace with your target screen
+              builder: (context) => BottomBar(), // Replace with your target screen
             ),
           );
         },
@@ -115,7 +121,7 @@ class AddressServices {
         context,
         e.toString(),
       );
-      print(e);
+      print('Error: $e'); // Print the error
     }
   }
 }

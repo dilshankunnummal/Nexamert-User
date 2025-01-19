@@ -5,7 +5,8 @@ class User {
   final String name;
   final String email;
   final String password;
-  final String address;
+  String address;
+  final List<String> pincode;
   final String type;
   final String token;
   final List<dynamic> cart;
@@ -15,6 +16,7 @@ class User {
       required this.name,
       required this.email,
       required this.password,
+      required this.pincode,
       required this.address,
       required this.type,
       required this.token,
@@ -26,6 +28,7 @@ class User {
       'name': name,
       'email': email,
       'password': password,
+      'pincode': pincode,
       'address': address,
       'type': type,
       'token': token,
@@ -40,6 +43,7 @@ class User {
       email: map['email'] as String,
       password: map['password'] as String,
       address: map['address'] as String,
+      pincode: List<String>.from(map['pincode']),
       type: map['type'] as String,
       token: map['token'] as String,
       cart: List<Map<String, dynamic>>.from(
@@ -61,6 +65,7 @@ class User {
     String? email,
     String? password,
     String? address,
+    List<String>? pincode,
     String? type,
     String? token,
     List<dynamic>? cart,
@@ -71,6 +76,7 @@ class User {
       email: email ?? this.email,
       password: password ?? this.password,
       address: address ?? this.address,
+      pincode: pincode ?? this.pincode,
       type: type ?? this.type,
       token: token ?? this.token,
       cart: cart ?? this.cart,
